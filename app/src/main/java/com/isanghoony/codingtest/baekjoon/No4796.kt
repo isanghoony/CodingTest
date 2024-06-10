@@ -9,31 +9,36 @@ package com.isanghoony.codingtest.baekjoon
  * */
 
 fun main() {
-    var lDay = 0
-    var pDay = 0
-    var vDay = 0
-    var cnt = 0
+    var lDay = 0 // 캠핑장을 사용할 수 있는 최대 일수
+    var pDay = 0 // 캠핑장의 휴업 주기
+    var vDay = 0 // 총 휴가 일수
+    var cnt = 0 // 캠핑장에서 보낼 수 있는 최대 일수
 
     for (testCase in 1..Int.MAX_VALUE) {
+        // 입력을 읽어와서 공백으로 나누고 lDay, pDay, vDay에 할당
         readlnOrNull()?.split(" ")?.let {
             lDay = it[0].toInt()
             pDay = it[1].toInt()
             vDay = it[2].toInt()
         }
 
+        // 모든 입력값이 0이면 종료
         if (lDay == 0 && pDay == 0 && vDay == 0) break
 
-        cnt = (vDay.div(pDay)).times(lDay)
-        vDay = vDay.rem(pDay)
-        cnt += if (vDay < lDay) vDay else lDay
+        // 캠핑장에서 보낼 수 있는 일수 계산
+        cnt = (vDay.div(pDay)).times(lDay) // 전체 주기 동안 캠핑할 수 있는 일수 계산
+        vDay = vDay.rem(pDay) // 남은 휴가 일수 계산
+        cnt += if (vDay < lDay) vDay else lDay // 남은 일수 중 가능한 최대 일수를 더함
+
         println("Case $testCase: $cnt")
     }
 
     /*
+    입력 예시:
     5 8 20
-    Case 1: 14
+    출력: Case 1: 14
     5 8 17
-    Case 2: 11
+    출력: Case 2: 11
     0 0 0
     */
 }
